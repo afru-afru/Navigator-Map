@@ -1,15 +1,16 @@
-import 'package:bitnavigatormap/screens/buildingInformation.dart';
 import 'package:bitnavigatormap/shortlist.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'currentlocation.dart';
-
 import 'homepage.dart';
 import 'navbar.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+ await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
