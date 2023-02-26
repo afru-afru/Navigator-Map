@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> getMyCurrentLocation() async {
     await LocationHelper.getCurrentLocation();
     position = await Geolocator.getLastKnownPosition();
-    print(position);
+
     setState(() {
       _kGooglePlexMarker = Marker(
         markerId: const MarkerId('_kgooglePlex'),

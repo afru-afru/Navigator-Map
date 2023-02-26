@@ -14,12 +14,16 @@ import 'homepage.dart';
 
 
 class navBar extends StatelessWidget {
-  const navBar({super.key, required MaterialColor color});
+  navBar({super.key, required MaterialColor color});
+   Color iconColor=Color.fromARGB(255, 115, 106, 95);
+
+
 
   @override
   Widget build(BuildContext context) {
     return  Drawer(
-      backgroundColor: Colors.black26,
+      backgroundColor: Color(0xFFBBDEFB),
+
 
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -45,9 +49,13 @@ class navBar extends StatelessWidget {
 
 
           SizedBox(height:12),
+
+
           ListTile(
-            leading: Icon(Icons.home,color: Colors.orange),
-            title: Text('Home',style: TextStyle(color: Colors.blue)),
+            leading: Icon(Icons.home,color: iconColor),
+            title: Text('Home',style: TextStyle(color: Colors.black)),
+
+            hoverColor: Colors.blue,
 
             onTap: () {
                 // Update the state of the app
@@ -57,8 +65,10 @@ class navBar extends StatelessWidget {
               },
           ),
            ListTile(
-            leading: Icon(Icons.favorite,color: Colors.orange),
-            title: Text('Short List',style: TextStyle(color: Colors.blue),),
+            leading: Icon(Icons.favorite,color: iconColor),
+            title: Text('Short List',style: TextStyle(color: Colors.black),),
+             focusColor: Colors.amber,
+            hoverColor: Colors.amber,
             onTap: (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) => const shortlist(),
             )
@@ -66,8 +76,10 @@ class navBar extends StatelessWidget {
             ),
           ),
            ListTile(
-            leading: Icon(Icons.home_max_rounded,color: Colors.orange),
-            title: Text('All lists',style: TextStyle(color: Colors.blue)),
+            leading: Icon(Icons.home_max_rounded,color: iconColor),
+            title: Text('All lists',style: TextStyle(color: Colors.black)),
+             focusColor: Colors.amber,
+            hoverColor: Colors.amber,
             onTap: (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) => const places()),
 
@@ -75,8 +87,10 @@ class navBar extends StatelessWidget {
             ),
           ),
             ListTile(
-            leading: Icon(Icons.info,color: Colors.orange,),
-            title: Text('About BIT',style: TextStyle(color: Colors.blue)),
+            leading: Icon(Icons.info,color: iconColor),
+            title: Text('About BIT',style: TextStyle(color: Colors.black)),
+             focusColor: Colors.amber,
+            hoverColor: Colors.amber,
             onTap: (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) => const infoAboutBit()),
 
@@ -84,8 +98,10 @@ class navBar extends StatelessWidget {
             ),
           ),
            ListTile(
-            leading: Icon(Icons.history,color: Colors.orange),
-            title: Text('History',style: TextStyle(color: Colors.blue)),
+            leading: Icon(Icons.history,color: iconColor),
+            title: Text('History',style: TextStyle(color: Colors.black)),
+             focusColor: Colors.amber,
+            hoverColor: Colors.amber,
              onTap: (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) => const history()),
 
@@ -93,8 +109,10 @@ class navBar extends StatelessWidget {
             ),
           ),
            ListTile(
-            leading: Icon(Icons.settings,color: Colors.orange),
-            title: Text('Setting',style: TextStyle(color: Colors.blue)),
+            leading: Icon(Icons.settings,color: iconColor),
+            title: Text('Setting',style: TextStyle(color: Colors.black)),
+             focusColor: Colors.amber,
+            hoverColor: Colors.amber,
              onTap: (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) => const setting()),
 
@@ -102,15 +120,19 @@ class navBar extends StatelessWidget {
             ),
           ),
            ListTile(
-            leading: Icon(Icons.contacts,color: Colors.orange),
-            title: Text('Contact',style: TextStyle(color: Colors.blue)),
+            leading: Icon(Icons.contacts,color: iconColor),
+            title: Text('Contact',style: TextStyle(color: Colors.black)),
+             focusColor: Colors.amber,
+            hoverColor: Colors.amber,
             // onTap: () => null,
           ),
 
 
            ListTile(
-            leading: Icon(Icons.feedback,color: Colors.orange),
-            title: Text('Feedback',style: TextStyle(color: Colors.blue)),
+            leading: Icon(Icons.feedback,color: iconColor),
+            title: Text('Feedback',style: TextStyle(color: Colors.black)),
+             focusColor: Colors.amber,
+            hoverColor: Colors.amber,
             onTap: (() => Navigator.push(context, MaterialPageRoute(
               builder: (context) => const submitfeedback(),
             )

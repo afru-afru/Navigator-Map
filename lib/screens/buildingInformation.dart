@@ -14,7 +14,7 @@ class Contents{
 
 List<Contents> contentList=[
 
-   Contents(
+  Contents(
     name:'01 Block',
     description: 'jdxkvjdxknjvdsvlkzvzdviusdiesusvdbxuvud',
     imgName: 'assets/image/administration.jpg'

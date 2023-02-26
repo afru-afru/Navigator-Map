@@ -39,6 +39,8 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   flutter_bloc: ^8.1.2
   geolocator: ^9.0.2
+  firebase_storage:
+  image_picker:
 
 
 
@@ -52,6 +54,8 @@ dependencies:
   cloud_firestore: ^4.4.0
   firebase_auth: ^4.2.6
   uuid: ^3.0.7
+  email_validator: ^2.1.17
+  dialog_alert: ^0.0.3
 
 dev_dependencies:
   flutter_test:

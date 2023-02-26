@@ -6,16 +6,18 @@ import 'package:bitnavigatormap/screens/search.dart';
 import 'package:flutter/material.dart';
 
 
+// ignore: camel_case_types
 class currentlocation extends StatelessWidget {
   const currentlocation({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return firstpage();
+    return const firstpage();
   }
 }
 
 
+// ignore: camel_case_types
 class firstpage extends StatefulWidget {
   const firstpage({super.key});
 
@@ -23,210 +25,221 @@ class firstpage extends StatefulWidget {
   State<firstpage> createState() => _firstpageState();
 }
 
+// ignore: camel_case_types
 class _firstpageState extends State<firstpage> {
+
+  Color c1=const Color(0xFFBBDEFB);
+  Color c2=const Color.fromARGB(255, 162, 106, 90);
+  Color tcolor=const Color.fromARGB(255, 132, 155, 166);
+  Color icolor=const Color.fromARGB(255, 115, 106, 95);
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-          padding: const EdgeInsets.fromLTRB(10, 50, 10,10),
-          child: GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  mainAxisExtent: 168
-                  //height: 40,
-                  //childAspectRatio: width / (height / 4)
-                  ),
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>  search(),
+    return
+    Scaffold(
+
+       backgroundColor: Colors.grey.shade300,
+      body: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 50, 10,10),
+            child: GridView(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    mainAxisExtent: 168
+                    //height: 40,
+                    //childAspectRatio: width / (height / 4)
+                    ),
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>  search(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          //boxShadow: const BoxShadow(color: Colors.black),
+                          color:c1),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          Icon(
+                            Icons.search,
+                            size: 50,
+                            color: icolor,
+                          ),
+                          Text(
+                            'Search',
+                            style: TextStyle(
+                              color: tcolor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        //boxShadow: const BoxShadow(color: Colors.black),
-                        color: Colors.orange),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.search,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Search',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
-                ),
-                //const SizedBox(height: 2,)
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const directions(),
+                  //const SizedBox(height: 2,)
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const directions(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: c2),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          Icon(
+                            Icons.directions,
+                            size: 50,
+                            color: icolor,
+                          ),
+                          Text(
+                            'Directions',
+                            style: TextStyle(
+                              color: tcolor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.blue),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.directions,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Directions',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const homepage2(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const homepage2(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: c2),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_home_work,
+                            size: 50,
+                            color: icolor,
+                          ),
+                          Text(
+                            'Buildings',
+                            style: TextStyle(
+                              color: tcolor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.blue),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.add_home_work,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Buildings',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const listOfOffices(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const listOfOffices(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: c1),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          Icon(
+                            Icons.account_balance_outlined,
+                            size: 50,
+                            color: icolor,
+                          ),
+                          Text(
+                            'Offices',
+                            style: TextStyle(
+                              color: tcolor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.account_balance_outlined,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Offices',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
-                ),
-                InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.info,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Info',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: c1),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.info,
+                            size: 50,
+                            color: icolor,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                InkWell(
-                     onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const submitfeedback(),
+                          Text(
+                            'Info',
+                            style: TextStyle(
+                              color: tcolor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.blue),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.feedback,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Feedback',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
+                  InkWell(
+                       onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const submitfeedback(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: c2),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          Icon(
+                            Icons.feedback,
+                            size: 50,
+                            color: icolor,
+                          ),
+                          Text(
+                            'Feedback',
+                            style: TextStyle(
+                              color: tcolor,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ]
+            )
                 ),
-              ]
-          )
-              );
+    );
 
   }
 }

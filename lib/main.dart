@@ -1,3 +1,4 @@
+import 'package:bitnavigatormap/screens/storeInfo.dart';
 import 'package:bitnavigatormap/shortlist.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,7 +28,9 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:
+      //  UploadPackages()
+       MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -69,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // => element.name.toLowerCase().contains(text.toLowerCase.toString())).toList();
 
     return Scaffold(
-      drawer: const navBar(color: Colors.orange),
+      drawer:  navBar(color: Colors.orange),
       appBar: AppBar(
         leading: Builder(builder: (context)=>IconButton(onPressed: (){
           Scaffold.of(context).openDrawer();
@@ -158,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: CurvedNavigationBar(
 
   backgroundColor: Colors.grey.shade100,
-  color: Colors.blue,
+  color: Colors.blueGrey,
   animationDuration: const Duration(milliseconds: 200),
     items: const <Widget>[
       Icon(Icons.home, size: 30,color: Colors.orange),
