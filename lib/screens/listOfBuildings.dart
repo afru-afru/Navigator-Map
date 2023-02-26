@@ -1,4 +1,5 @@
 import 'package:bitnavigatormap/screens/buildingInformation.dart';
+import 'package:bitnavigatormap/screens/polyLineplaces.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:bitnavigatormap/homepage.dart';
@@ -54,7 +55,28 @@ class homepage2 extends StatelessWidget {
                 print('Is Favorite $isFavorite)');
               },
             ),
-           leading:const Icon(Icons.location_on,color: Colors.orange,),
+           leading:GestureDetector(
+                                       onTap: ()
+
+
+
+
+                                       {
+
+                                        Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          polyLineplaces(contents: contents),
+                                    ));
+
+                                       },
+                                      child:const Icon(
+                                       Icons.navigation,
+                                       color: Colors.orange,
+
+                                   ),
+                                       ),
            onTap: (){
             Navigator.push(
               context,MaterialPageRoute(

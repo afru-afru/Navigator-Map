@@ -76,7 +76,8 @@ class _submitfeedbackState extends State<submitfeedback> {
                 ),
                    Padding(
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 2),
-              child: Text(_errorMessage, style: TextStyle(color: Colors.red),),
+              child: Text(_errorMessage, style: TextStyle(color: Colors.red),
+              ),
             ),
                  Padding(
                   padding: const EdgeInsets.all(15),
