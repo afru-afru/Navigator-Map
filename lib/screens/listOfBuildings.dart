@@ -75,7 +75,7 @@ class homepage2 extends StatelessWidget {
                                       context,
                                        MaterialPageRoute(
                                       builder: (context) =>
-                                          polyLineplaces(),
+                                          polyLineplaces(id:namex[index]["id"], title: 'namex[index]["name"]',),
                                     )
                                     );
 

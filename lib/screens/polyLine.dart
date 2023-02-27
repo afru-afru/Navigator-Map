@@ -1,6 +1,8 @@
 import 'dart:async';
 
+
 import 'package:bitnavigatormap/helpers/location_helpers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:bitnavigatormap/screens/listOfBuildings.dart';
 // import 'package:bitnavigatormap/screens/listOfFaculity.dart';
 // import 'package:bitnavigatormap/screens/listOfOffices.dart';
@@ -15,53 +17,42 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 
 // ignore: camel_case_types
-class polyLineplaces extends StatelessWidget {
-  // const polyLineplaces({super.key});
-  //  final namex attributes;
-  // const polyLineplaces(this.attributes, {super.key});
+// class polyLineplaces extends StatelessWidget {
+//   const polyLineplaces({super.key});
+//    final namex attributes;
+//   const polyLineplaces(this.attributes, {super.key});
+//  String id;
 
 
-  @override
-  Widget build(BuildContext context) {
-    return const MyHomePage(title: 'ghfg');
-  }
-}
+//   polyLineplaces({super.key, required this.id});
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+//   @override
+//   Widget build(BuildContext context) {
+//     return MyHomePage(title: 'ghfg');
+//   }
+// }
+
+class polyLineplaces extends StatefulWidget {
+   String id;
+
+
+  polyLineplaces({super.key, required this.id, required this.title});
+
+  // polyLineplaces({super.key, required this.title});
 
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<polyLineplaces> createState() => _MyHomePageState();
 }
 
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<polyLineplaces> {
+
   GoogleMapController? mapController;
 
-  double _originLatitude = 26.48424, _originLongitude = 50.04551;
-  double _destLatitude = 26.46423, _destLongitude = 50.06358;
-  Map<MarkerId, Marker> markers = {};
-  Map<PolylineId, Polyline> polylines = {};
-  List<LatLng> polylineCoordinates = [];
-  PolylinePoints polylinePoints = PolylinePoints();
-  String googleAPiKey = "AIzaSyBVsByxtqcQlBiMAQW_FXVBBwhKGpUzeyU";
 
-  @override
-  void initState() {
-    super.initState();
-
-    /// origin marker
-    // _addMarker(LatLng(_originLatitude, _originLongitude), "origin",
-    //     BitmapDescriptor.defaultMarker);
-
-    // /// destination marker
-    // _addMarker(LatLng(_destLatitude, _destLongitude), "destination",
-    //     BitmapDescriptor.defaultMarkerWithHue(90));
-    // _getPolyline();
-  }
 
 
 
@@ -91,7 +82,7 @@ final Completer<GoogleMapController> _controller =
 
 
 
-
+     String? _currentAddress;
       static Position?position;
 
 
@@ -99,7 +90,7 @@ final Completer<GoogleMapController> _controller =
       await LocationHelper.getCurrentLocation();
       position = await Geolocator.getLastKnownPosition().whenComplete(() {
         setState(() {
-
+ position = position;
 
         });
       });
@@ -111,7 +102,13 @@ final Completer<GoogleMapController> _controller =
 
   }
 
+@override
+void initState(){
+  super.initState();
+  getMyCurrentLocation();
 
+
+}
 
 
 
@@ -120,33 +117,16 @@ final Completer<GoogleMapController> _controller =
   @override
   Widget build(BuildContext context) {
 
+    List<LatLng> _polylineCoordinates = [    LatLng(position!.latitude, position!.longitude),    LatLng(37.78519, -122.40654),   ];
+
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
        color: Colors.orange,
         ),
         backgroundColor: Colors.white,
-        title: const TextField(
-
-
-          style: TextStyle(
-                    color:Colors.black45,
-                  ),
-
-                  decoration: InputDecoration(
-                    // prefixIcon: Icon(Icons.arrow_back,color: Colors.orange,),
-                    // suffixIcon: Icon(Icons.close,color: Colors.orange,) ,
-                    hintText: "search...",
-
-                    hintStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
-                    border: InputBorder.none,
-
-
-                  ),
-
-
-
-        ),
+        title: Text('widget.title'),
          shape: const RoundedRectangleBorder (
           borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(25),
@@ -157,14 +137,36 @@ final Completer<GoogleMapController> _controller =
 
 
       body:
-        position !=null ?
+
+
+StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+            stream:
+                FirebaseFirestore.instance.collection("Buildings").doc(widget.id).snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                var doc = snapshot.data!;
+
+                Text(doc['name']);
+
+                return
+
+                position !=null ?
         GoogleMap(
         mapType: MapType.satellite                        ,
-        // markers: {_kGooglePlexMarker},
-        // polylines: {_kpolyline},
-        // polygons: {_kpolygon},
+
         myLocationButtonEnabled: false,
         zoomControlsEnabled: false,
+         polylines: {
+          Polyline(
+            polylineId: PolylineId('route1'),
+            color: Colors.red,
+            width: 7,
+            points: [    LatLng(position!.latitude, position!.longitude),    LatLng( double.parse("${doc['lat']}") ,double.parse("${doc['long']}") ),   ]
+          ),},
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
@@ -176,7 +178,10 @@ final Completer<GoogleMapController> _controller =
           child: CircularProgressIndicator(color: Colors.orange,),
         ),
 
-       ),
+
+              );
+              }
+            }
 
 
 
@@ -185,7 +190,7 @@ final Completer<GoogleMapController> _controller =
 
 
 
-
+)
     );
 
       // FloatingActionButton: Container(
@@ -196,36 +201,6 @@ final Completer<GoogleMapController> _controller =
       //     onPressed: () { gotoMyCurrentLocation(); },
       //     child: Icon(Icons.place,color: Colors.orange,),
       //   ),);
-  }
-
-  _addMarker(LatLng position, String id, BitmapDescriptor descriptor) {
-    MarkerId markerId = MarkerId(id);
-    Marker marker =
-        Marker(markerId: markerId, icon: descriptor, position: position);
-    markers[markerId] = marker;
-  }
-
-  _addPolyLine() {
-    PolylineId id = PolylineId("poly");
-    Polyline polyline = Polyline(
-        polylineId: id, color: Colors.red, points: polylineCoordinates);
-    polylines[id] = polyline;
-    setState(() {});
-  }
-
-  _getPolyline() async {
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        googleAPiKey,
-        PointLatLng(_originLatitude, _originLongitude),
-        PointLatLng(_destLatitude, _destLongitude),
-        travelMode: TravelMode.driving,
-        wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]);
-    if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-    }
-    _addPolyLine();
   }
 }
 
@@ -355,3 +330,9 @@ final Completer<GoogleMapController> _controller =
 //     );
 //   }
 // }
+
+
+
+
+
+

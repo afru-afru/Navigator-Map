@@ -22,9 +22,10 @@ class DataSearch extends SearchDelegate<String> {
     // throw UnimplementedError();
   }
 
+ List<LatLng> _polylineCoordinates = [    LatLng(37.77483, -122.41942),    LatLng(37.78519, -122.40654),    LatLng(37.77745, -122.39074),  ];
 
 
-   final Completer<GoogleMapController> _controller =
+   Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
@@ -109,7 +110,7 @@ class DataSearch extends SearchDelegate<String> {
                                       context,
                                        MaterialPageRoute(
                                       builder: (context) =>
-                                          polyLineplaces(),
+                                          polyLineplaces(id: data.get('id'), title: 'namex[index]["id"]',),
                                     )
                                     );
 
@@ -170,21 +171,27 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-         myLocationButtonEnabled: false,
-              zoomControlsEnabled: false,
+    return Center(
+      child: Text('Search places'),
+    );
+    // GoogleMap(
+    //      onMapCreated: (GoogleMapController controller) {
+    //       _controller = controller as Completer<GoogleMapController>;
+    //     },
+    //     polylines: {
+    //       Polyline(
+    //         polylineId: PolylineId('route1'),
+    //         color: Colors.red,
+    //         width: 5,
+    //         points: _polylineCoordinates,
+    //       ),
+    //     },
+    //     initialCameraPosition: CameraPosition(
+    //       target: LatLng(37.77483, -122.41942),
+    //       zoom: 12,
+    //     ),
+    //   );
 
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      );
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: _goToTheLake,
-      //   label: const Text('To the lake!'),
-      //   icon: const Icon(Icons.directions_boat),
-      // ),
 
 
   }

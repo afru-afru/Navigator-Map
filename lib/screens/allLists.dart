@@ -80,7 +80,7 @@ class _placesState extends State<places> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          polyLineplaces(),
+                                          polyLineplaces(id:namex[index]["id"], title: 'namex[index]["id"]',),
                                     ));
 
                                        },
