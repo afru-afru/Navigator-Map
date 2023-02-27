@@ -41,6 +41,27 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   GoogleMapController? mapController;
 
+  double _originLatitude = 26.48424, _originLongitude = 50.04551;
+  double _destLatitude = 26.46423, _destLongitude = 50.06358;
+  Map<MarkerId, Marker> markers = {};
+  Map<PolylineId, Polyline> polylines = {};
+  List<LatLng> polylineCoordinates = [];
+  PolylinePoints polylinePoints = PolylinePoints();
+  String googleAPiKey = "AIzaSyBVsByxtqcQlBiMAQW_FXVBBwhKGpUzeyU";
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// origin marker
+    // _addMarker(LatLng(_originLatitude, _originLongitude), "origin",
+    //     BitmapDescriptor.defaultMarker);
+
+    // /// destination marker
+    // _addMarker(LatLng(_destLatitude, _destLongitude), "destination",
+    //     BitmapDescriptor.defaultMarkerWithHue(90));
+    // _getPolyline();
+  }
 
 
 
@@ -64,8 +85,7 @@ final Completer<GoogleMapController> _controller =
     zoom: 17,
   );
 
-  final Set<Marker> _markers = {};
-  final Set<Polyline> _polyline = {};
+
 
 
 
@@ -91,13 +111,7 @@ final Completer<GoogleMapController> _controller =
 
   }
 
-@override
-void initState(){
-  super.initState();
-  getMyCurrentLocation();
 
-
-}
 
 
 
@@ -171,6 +185,7 @@ void initState(){
 
 
 
+
     );
 
       // FloatingActionButton: Container(
@@ -181,6 +196,36 @@ void initState(){
       //     onPressed: () { gotoMyCurrentLocation(); },
       //     child: Icon(Icons.place,color: Colors.orange,),
       //   ),);
+  }
+
+  _addMarker(LatLng position, String id, BitmapDescriptor descriptor) {
+    MarkerId markerId = MarkerId(id);
+    Marker marker =
+        Marker(markerId: markerId, icon: descriptor, position: position);
+    markers[markerId] = marker;
+  }
+
+  _addPolyLine() {
+    PolylineId id = PolylineId("poly");
+    Polyline polyline = Polyline(
+        polylineId: id, color: Colors.red, points: polylineCoordinates);
+    polylines[id] = polyline;
+    setState(() {});
+  }
+
+  _getPolyline() async {
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        googleAPiKey,
+        PointLatLng(_originLatitude, _originLongitude),
+        PointLatLng(_destLatitude, _destLongitude),
+        travelMode: TravelMode.driving,
+        wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]);
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    }
+    _addPolyLine();
   }
 }
 
