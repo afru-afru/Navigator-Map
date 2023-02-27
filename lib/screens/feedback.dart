@@ -59,11 +59,11 @@ String _errorMessage='';
                     decoration: const InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: Colors.orange, width: 2),
+                        borderSide: BorderSide(color: Colors.brown, width: 2),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.brown),
                       ),
                       labelText: 'Enter Your Email',
                       hintText: 'Email',
@@ -92,11 +92,11 @@ String _errorMessage='';
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                           borderSide:
-                              BorderSide(color: Colors.orange, width: 2),
+                              BorderSide(color: Colors.brown, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                          borderSide: BorderSide(color: Colors.orange),
+                          borderSide: BorderSide(color: Colors.brown),
                         )),
 
 
@@ -113,7 +113,7 @@ String _errorMessage='';
                       child:
                       Container(
                         height: 34,
-                        color: Colors.lightBlue,
+                        color: Colors.brown.shade100,
                         child: const OutlinedButton(
                           onPressed: null,
                           style: ButtonStyle(),
@@ -121,21 +121,21 @@ String _errorMessage='';
                         ),
                       )),
                 ),
-                   StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: FirebaseFirestore.instance.collection("Feedbacks").snapshots(),
+                //    StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                //   stream: FirebaseFirestore.instance.collection("Feedbacks").snapshots(),
 
-                  builder: (context, snapshot) {
+                //   builder: (context, snapshot) {
 
-                    if (!snapshot.hasData) {
-                      return Center(child: CircularProgressIndicator(),);
-                    }
-                  else{
-                    List namex = snapshot.data!.docs;
+                //     if (!snapshot.hasData) {
+                //       return Center(child: CircularProgressIndicator(),);
+                //     }
+                //   else{
+                //     List namex = snapshot.data!.docs;
 
-                   return Text(namex[0]["email"]);
-                  }
-                  }
-                )
+                //    return Text(namex[0]["email"]);
+                //   }
+                //   }
+                // )
               ],
             )));
   }

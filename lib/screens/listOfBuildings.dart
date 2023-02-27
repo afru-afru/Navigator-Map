@@ -70,18 +70,14 @@ class homepage2 extends StatelessWidget {
                               ),
                               leading:  GestureDetector(
                                        onTap: ()
-
-
-
-
                                        {
-
-                                        Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
+                                      Navigator.push(
+                                      context,
+                                       MaterialPageRoute(
                                       builder: (context) =>
                                           polyLineplaces(),
-                                    ));
+                                    )
+                                    );
 
                                        },
                                       child:const Icon(

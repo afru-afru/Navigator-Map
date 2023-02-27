@@ -27,7 +27,7 @@ class _favouritesState extends State<favourites> {
    iconTheme: const IconThemeData(
        color: Colors.orange,
         ),
-    title: const Text('ShortLsts',style: TextStyle(color: Colors.black26),),
+    title: const Text('Short Lists',style: TextStyle(color: Colors.brown),),
     backgroundColor: Colors.grey.shade100,
      shape: const RoundedRectangleBorder (
           borderRadius: BorderRadius.only(

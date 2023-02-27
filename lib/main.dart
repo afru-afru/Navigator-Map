@@ -1,17 +1,26 @@
+import 'package:bitnavigatormap/screens/contacts.dart';
+import 'package:bitnavigatormap/screens/searchList.dart';
 import 'package:bitnavigatormap/screens/storeInfo.dart';
 import 'package:bitnavigatormap/shortlist.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+
 
 import 'currentlocation.dart';
 import 'homepage.dart';
 import 'navbar.dart';
 
+const FAVOURITES_BOX='favourites box';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
  await Firebase.initializeApp();
+await Hive.initFlutter();
+await Hive.openBox(FAVOURITES_BOX);
   runApp(const MyApp());
 }
 
@@ -31,6 +40,7 @@ class MyApp extends StatelessWidget {
       home:
       //  UploadPackages()
        MyHomePage(title: 'Flutter Demo Home Page'),
+      // trytest(),
     );
   }
 }
@@ -77,68 +87,73 @@ class _MyHomePageState extends State<MyHomePage> {
         leading: Builder(builder: (context)=>IconButton(onPressed: (){
           Scaffold.of(context).openDrawer();
         }, icon: const Icon(Icons.menu),color: Colors.orange,)),
-        backgroundColor: Colors.grey.shade100,
+        backgroundColor: Colors.brown.shade100,
         title: appBarTitle,
         actions: <Widget>[
           IconButton(
             icon: actionIcon,
            onPressed: () {
-            setState(() {
-              if(actionIcon.icon == Icons.search){
-                actionIcon=const Icon(Icons.close,color:Colors.orange);
-                appBarTitle=  TextFormField(
-                  controller: controller,
-                  style: const TextStyle(
-                    color:Colors.black45,
-                  ),
-                  decoration: const InputDecoration(
-                    // prefixIcon: Icon(Icons.search,color: Colors.white,),
-                    hintText: "search...",
-                    hintStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
-                    border: InputBorder.none,
-
-
-                  ),
-                  // onFieldSubmitted:  (covariant) {
-                  //   setState(() {
-                  //     text =covariant;
-                  //   });
-                  // },
-                );
-                 Positioned(
-                  top: 20,
-                  child: Container(
-                   padding: const EdgeInsets.symmetric(
-                    vertical: 6,
-                    horizontal: 12,
-                   ),
-                   decoration: BoxDecoration(
-                    color: Colors.orange,
-                    borderRadius: BorderRadius.circular(20.0),
-
-                  boxShadow: const[
-                    BoxShadow(
-                      color:Colors.orange,
-                      offset: Offset(0, 2),
-                      blurRadius: 6.0,
-                    )
-                  ]
-                   )
-
-
-                  )
+showSearch(context: context, delegate: DataSearch());
+            // setState(() {
 
 
 
-                  ,);
-              }
-              else{
-                actionIcon=const Icon(Icons.search,color:Colors.orange);
-                appBarTitle=const Text('Bahirdar Institute Of Technology',style: TextStyle(color: Colors.black45,fontSize: 17));
 
 
-              }
-            });
+              // if(actionIcon.icon == Icons.search){
+              //   actionIcon=const Icon(Icons.close,color:Colors.orange);
+              //   appBarTitle=  TextFormField(
+              //     controller: controller,
+              //     style: const TextStyle(
+              //       color:Colors.black45,
+              //     ),
+              //     decoration: const InputDecoration(
+              //       // prefixIcon: Icon(Icons.search,color: Colors.white,),
+              //       hintText: "search...",
+              //       hintStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+              //       border: InputBorder.none,
+
+
+              //     ),
+
+              //   );
+              //    Positioned(
+              //     top: 20,
+              //     child: Container(
+              //      padding: const EdgeInsets.symmetric(
+              //       vertical: 6,
+              //       horizontal: 12,
+              //      ),
+              //      decoration: BoxDecoration(
+              //       color: Colors.orange,
+              //       borderRadius: BorderRadius.circular(20.0),
+
+              //     boxShadow: const[
+              //       BoxShadow(
+              //         color:Colors.orange,
+              //         offset: Offset(0, 2),
+              //         blurRadius: 6.0,
+              //       )
+              //     ]
+              //      )
+
+
+              //     )
+
+
+
+              //     ,);
+              // }
+              // else{
+              //   actionIcon=const Icon(Icons.search,color:Colors.orange);
+              //   appBarTitle=const Text('Bahirdar Institute Of Technology',style: TextStyle(color: Colors.black45,fontSize: 17));
+
+
+              // }
+
+
+
+            // });
              },
              )
              ],
@@ -161,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: CurvedNavigationBar(
 
   backgroundColor: Colors.grey.shade100,
-  color: Colors.blueGrey,
+  color: Colors.brown.shade100,
   animationDuration: const Duration(milliseconds: 200),
     items: const <Widget>[
       Icon(Icons.home, size: 30,color: Colors.orange),

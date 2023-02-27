@@ -2,6 +2,7 @@
 
 
 import 'package:bitnavigatormap/screens/allLists.dart';
+import 'package:bitnavigatormap/screens/contacts.dart';
 import 'package:bitnavigatormap/screens/feedback.dart';
 import 'package:bitnavigatormap/screens/history.dart';
 import 'package:bitnavigatormap/screens/infoAboutBit.dart';
@@ -22,7 +23,7 @@ class navBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Drawer(
-      backgroundColor: Color(0xFFBBDEFB),
+      backgroundColor: Colors.brown.shade100,
 
 
       shape: RoundedRectangleBorder(
@@ -124,7 +125,11 @@ class navBar extends StatelessWidget {
             title: Text('Contact',style: TextStyle(color: Colors.black)),
              focusColor: Colors.amber,
             hoverColor: Colors.amber,
-            // onTap: () => null,
+            onTap: (() => Navigator.push(context, MaterialPageRoute(
+              builder: (context) =>  contacts()),
+
+            )
+            ),
           ),
 
 

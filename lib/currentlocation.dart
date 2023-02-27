@@ -1,5 +1,7 @@
+import 'package:bitnavigatormap/screens/contacts.dart';
 import 'package:bitnavigatormap/screens/directions.dart';
 import 'package:bitnavigatormap/screens/feedback.dart';
+import 'package:bitnavigatormap/screens/infoAboutBit.dart';
 import 'package:bitnavigatormap/screens/listOfBuildings.dart';
 import 'package:bitnavigatormap/screens/listOfOffices.dart';
 import 'package:bitnavigatormap/screens/search.dart';
@@ -28,7 +30,7 @@ class firstpage extends StatefulWidget {
 // ignore: camel_case_types
 class _firstpageState extends State<firstpage> {
 
-  Color c1=const Color(0xFFBBDEFB);
+  Color c1=const Color.fromARGB(255, 129, 131, 134);
   Color c2=const Color.fromARGB(255, 162, 106, 90);
   Color tcolor=const Color.fromARGB(255, 132, 155, 166);
   Color icolor=const Color.fromARGB(255, 115, 106, 95);
@@ -52,12 +54,13 @@ class _firstpageState extends State<firstpage> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>  search(),
-                        ),
-                      );
+                      showSearch(context: context, delegate: DataSearch());
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) =>  search(),
+                      //   ),
+                      // );
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -181,6 +184,14 @@ class _firstpageState extends State<firstpage> {
                     ),
                   ),
                   InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const infoAboutBit(),
+                        ),
+                      );
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),

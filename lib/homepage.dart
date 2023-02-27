@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-void main() {
-  runApp(const homepage());
-}
+// void main() {
+//   runApp(const homepage());
+// }
 
 // ignore: camel_case_types
 class homepage extends StatelessWidget {

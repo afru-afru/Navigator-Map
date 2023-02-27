@@ -68,7 +68,7 @@ final Completer<GoogleMapController> _controller =
   );
 
 
-  static final Marker _kGooglePlexMarker=Marker(markerId:
+  static late Marker _kGooglePlexMarker=Marker(markerId:
   MarkerId('_kgooglePlex'),
   infoWindow: InfoWindow(title:'googlePlex'),
   icon: BitmapDescriptor.defaultMarker,
@@ -119,8 +119,13 @@ final Completer<GoogleMapController> _controller =
       position = await Geolocator.getLastKnownPosition().whenComplete(() {
         setState(() {
 
-
-        });
+ _kGooglePlexMarker = Marker(
+        markerId: const MarkerId('_kgooglePlex'),
+        infoWindow: const InfoWindow(title: 'googlePlex'),
+        icon: BitmapDescriptor.defaultMarker,
+        position: LatLng(position!.latitude, position!.longitude),
+      );
+       });
       });
     }
 

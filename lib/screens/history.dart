@@ -25,7 +25,7 @@ class _historiesState extends State<histories> {
          iconTheme: const IconThemeData(
        color: Colors.orange,
         ),
-    title: const Text('History',style: TextStyle(color: Colors.black26),),
+    title: const Text('History',style: TextStyle(color: Colors.brown),),
     backgroundColor: Colors.grey.shade100,
      shape: const RoundedRectangleBorder (
           borderRadius: BorderRadius.only(

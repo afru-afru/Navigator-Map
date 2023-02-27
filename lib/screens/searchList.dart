@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:bitnavigatormap/screens/detail_information.dart';
 import 'package:bitnavigatormap/screens/polyLine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DataSearch extends SearchDelegate<String> {
   CollectionReference ref = FirebaseFirestore.instance.collection("Buildings");
@@ -21,16 +18,6 @@ class DataSearch extends SearchDelegate<String> {
     ];
     // throw UnimplementedError();
   }
-
-
-
-   final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
 
   @override
   Widget? buildLeading(BuildContext context) {
@@ -170,22 +157,8 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-         myLocationButtonEnabled: false,
-              zoomControlsEnabled: false,
-
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      );
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: _goToTheLake,
-      //   label: const Text('To the lake!'),
-      //   icon: const Icon(Icons.directions_boat),
-      // ),
-
-
+    return const Center(
+      child: Text(" search places"),
+    );
   }
 }
