@@ -8,7 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DataSearch extends SearchDelegate<String> {
   CollectionReference ref = FirebaseFirestore.instance.collection("Buildings");
-  CollectionReference ref2 = FirebaseFirestore.instance.collection("offices");
+  CollectionReference ref2 = FirebaseFirestore.instance.collection("Offices");
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -100,7 +100,7 @@ class DataSearch extends SearchDelegate<String> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        detailInfo(id: data.get('id'))));
+                                        detailInfo(id: data.get('id'),title: data.get('id'),)));
                           },
                           title: Text(title),
                           leading: GestureDetector(
@@ -110,7 +110,7 @@ class DataSearch extends SearchDelegate<String> {
                                       context,
                                        MaterialPageRoute(
                                       builder: (context) =>
-                                          polyLineplaces(id: data.get('id'), title: 'namex[index]["id"]',),
+                                          polyLineplaces(id: data.get('id'), title: data.get('name'),),
                                     )
                                     );
 
@@ -149,7 +149,7 @@ class DataSearch extends SearchDelegate<String> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        detailInfo(id: data.get('id'))));
+                                        detailInfo(id: data.get('id'),title: data.get('name'),)));
                           },
                           title: Text(title),
                           // leading: Image.network(image),
@@ -161,7 +161,7 @@ class DataSearch extends SearchDelegate<String> {
                 );
               } else {
                 return const Center(
-                  child: Text("No query found!"),
+                  child: Text("Unknown place!"),
                 );
               }
             });

@@ -37,7 +37,7 @@ String _errorMessage='';
           ),
           title: const Text(
             'Feedback',
-            style: TextStyle(color: Colors.black26),
+            style: TextStyle(color: Colors.brown),
           ),
           backgroundColor: Colors.grey.shade100,
           shape: const RoundedRectangleBorder(

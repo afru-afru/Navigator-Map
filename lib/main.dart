@@ -1,18 +1,28 @@
 import 'package:bitnavigatormap/screens/contacts.dart';
+import 'package:bitnavigatormap/screens/whishlist_provider.dart';
 import 'package:bitnavigatormap/screens/searchList.dart';
 import 'package:bitnavigatormap/screens/storeInfo.dart';
+import 'package:bitnavigatormap/screens/whishlistpage.dart';
 import 'package:bitnavigatormap/shortlist.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 import 'package:hive_flutter/adapters.dart';
+
 
 
 import 'currentlocation.dart';
 import 'homepage.dart';
 import 'navbar.dart';
+
+import 'package:hive/hive.dart';
+
+import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:path_provider/path_provider.dart';
 
 const FAVOURITES_BOX='favourites box';
 
@@ -20,7 +30,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
  await Firebase.initializeApp();
 await Hive.initFlutter();
-await Hive.openBox(FAVOURITES_BOX);
+Hive.registerAdapter(WhishlistAdapter());
+  await Hive.openBox<Whishlist>('wishlist_products');
+
   runApp(const MyApp());
 }
 
@@ -30,17 +42,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'semister project',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<WhishlistProvider>( create: (context) => WhishlistProvider()),
 
-        primarySwatch: Colors.blue,
+      ],
+      child: MaterialApp(
+        title: 'semister project',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+
+          primarySwatch: Colors.blue,
+        ),
+        home:
+        //  UploadPackages()
+         MyHomePage(title: 'Flutter Demo Home Page'),
+        // trytest(),
       ),
-      home:
-      //  UploadPackages()
-       MyHomePage(title: 'Flutter Demo Home Page'),
-      // trytest(),
     );
   }
 }
@@ -66,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
    int currentpage=0;
 
-  List <Widget> pages= [currentlocation(),homepage(),shortlist(),];
+  List <Widget> pages= [currentlocation(),homepage(),WhishlistPage(),];
 
   Widget appBarTitle=const Text("Bahirdar Institute Of Technology",style: TextStyle(color: Colors.black45,fontSize: 17),);
 
@@ -93,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: actionIcon,
            onPressed: () {
-showSearch(context: context, delegate: DataSearch());
+    showSearch(context: context, delegate: DataSearch());
             // setState(() {
 
 
@@ -157,7 +175,7 @@ showSearch(context: context, delegate: DataSearch());
              },
              )
              ],
-             shape: const RoundedRectangleBorder (
+          shape: const RoundedRectangleBorder (
           borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(25),
           bottomLeft: Radius.circular(25)

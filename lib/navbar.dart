@@ -8,6 +8,7 @@ import 'package:bitnavigatormap/screens/history.dart';
 import 'package:bitnavigatormap/screens/infoAboutBit.dart';
 import 'package:bitnavigatormap/screens/listOfOffices.dart';
 import 'package:bitnavigatormap/screens/setting.dart';
+import 'package:bitnavigatormap/screens/whishlistpage.dart';
 import 'package:bitnavigatormap/shortlist.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,7 @@ class navBar extends StatelessWidget {
              focusColor: Colors.amber,
             hoverColor: Colors.amber,
             onTap: (() => Navigator.push(context, MaterialPageRoute(
-              builder: (context) => const shortlist(),
+              builder: (context) => const WhishlistPage(),
             )
             )
             ),

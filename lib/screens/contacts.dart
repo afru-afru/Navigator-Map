@@ -29,7 +29,7 @@ class contacts extends StatelessWidget {
        bottomNavigationBar: ContactUsBottomAppBar(
           companyName: 'BIT',
           textColor: Colors.white,
-          backgroundColor: Colors.blueGrey,
+          backgroundColor: Colors.brown.shade100,
           email: 'bduinfo@bdu.edu.et',
             // textFont: 'Sail',
         ),
@@ -45,7 +45,7 @@ class contacts extends StatelessWidget {
           githubUserName: 'AbhishekDoshi26',
           linkedinURL: 'https://et.linkedin.com/school/bduethiopia/',
           // tagLine: 'Flutter Developer',
-          twitterHandle: 'https://twitter.com/bdueduet', cardColor: Colors.blueGrey, companyColor: Colors.brown, taglineColor: Colors.grey.shade100, textColor: Colors.amber,companyFontSize: 23,
+          twitterHandle: 'https://twitter.com/bdueduet', cardColor: Colors.brown.shade100, companyColor: Colors.brown, taglineColor: Colors.grey.shade100, textColor: Colors.brown,companyFontSize: 23,
           // instagramUserName: '_abhishek_doshi',
         ),
     );

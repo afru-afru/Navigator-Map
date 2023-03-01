@@ -2,7 +2,7 @@ import 'dart:async';
 
 
 import 'package:bitnavigatormap/helpers/location_helpers.dart';
-import 'package:bitnavigatormap/screens/descriptionAboutBuildings.dart';
+import 'package:bitnavigatormap/screens/descriptionAbout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:bitnavigatormap/screens/listOfBuildings.dart';
 // import 'package:bitnavigatormap/screens/listOfFaculity.dart';
@@ -11,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-
-import 'descriptionAbout.dart';
 
 
 
@@ -35,12 +33,13 @@ import 'descriptionAbout.dart';
 //   }
 // }
 
-class polyLineplaces extends StatefulWidget {
+class polyLineOffice extends StatefulWidget {
    String id;
 
 
 
-  polyLineplaces({super.key, required this.id, required this.title});
+
+  polyLineOffice({super.key, required this.id, required this.title});
 
   // polyLineplaces({super.key, required this.title});
 
@@ -48,13 +47,18 @@ class polyLineplaces extends StatefulWidget {
   final String title;
 
   @override
-  State<polyLineplaces> createState() => _MyHomePageState();
+  State<polyLineOffice> createState() => _MyHomePageState();
 }
 
 
-class _MyHomePageState extends State<polyLineplaces> {
+class _MyHomePageState extends State<polyLineOffice> {
 
   GoogleMapController? mapController;
+
+   Map<MarkerId, Marker> markers = {};
+  Map<PolylineId, Polyline> polylines = {};
+  List<LatLng> polylineCoordinates = [];
+PolylinePoints polylinePoints = PolylinePoints();
 
 
 
@@ -123,7 +127,7 @@ void initState(){
 
     List<LatLng> _polylineCoordinates = [    LatLng(position!.latitude, position!.longitude),    LatLng(37.78519, -122.40654),   ];
 
-
+    Icon actionIcon = const Icon(Icons.info,color: Colors.orange);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -145,7 +149,7 @@ void initState(){
                                       context,
                                        MaterialPageRoute(
                                       builder: (context) =>
-                                          descriptionAboutBuildings(id:widget.id,title: widget.title,),
+                                          descriptionAbout(id:widget.id,title: widget.title,),
                                     )
                                     );
 
@@ -165,11 +169,11 @@ void initState(){
 
          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
             stream:
-                FirebaseFirestore.instance.collection("Buildings").doc(widget.id).snapshots(),
+                FirebaseFirestore.instance.collection("Offices").doc(widget.id).snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
-                     child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(),
                 );
               } else {
                 var doc = snapshot.data!;
@@ -179,34 +183,38 @@ void initState(){
                 return
 
                 position !=null ?
-        GoogleMap(
-        mapType: MapType.satellite                        ,
+        Stack
+        (
+          children: [GoogleMap(
+          mapType: MapType.satellite                        ,
 
-        myLocationButtonEnabled: false,
-        zoomControlsEnabled: false,
-         polylines: {
-          Polyline(
-            polylineId: PolylineId('route1'),
-            color: Colors.red,
-            width: 7,
-            points: [    LatLng(position!.latitude, position!.longitude),    LatLng( double.parse("${doc['lat']}") ,double.parse("${doc['long']}") ),   ]
-          ),},
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+          myLocationButtonEnabled: false,
+          zoomControlsEnabled: false,
+           polylines: {
+            Polyline(
+              polylineId: const PolylineId('route1'),
+              color: Colors.red,
+              width: 7,
+              points: [    LatLng(position!.latitude, position!.longitude),    LatLng( double.parse("${doc['lat']}") ,double.parse("${doc['long']}") ),   ]
+            ),},
+          initialCameraPosition: _kGooglePlex,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
 
-      )
-      :Center(
-        child: Container(
-          child: CircularProgressIndicator(color: Colors.orange,),
-        ),
+              ),
+
+
+
+
+          ]
+        )
+      :const Center(
+        child: CircularProgressIndicator(color: Colors.orange,),
 
 
               );
               }
-
-
             }
 
 
@@ -217,7 +225,6 @@ void initState(){
 
 
 )
-
     );
 
       // FloatingActionButton: Container(
